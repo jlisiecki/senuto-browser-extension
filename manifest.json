@@ -1,6 +1,6 @@
 {
     "name": "Senuto Browser Extension",
-    "description": "Build an Extension!",
+    "description": "This extension shows Senuto visibility graph for page in active browser tab.",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": ["storage", "activeTab", "scripting"],
