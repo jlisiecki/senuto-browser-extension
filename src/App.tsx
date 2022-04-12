@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import getAccessToken from './api/getAccessToken';
+import getVisibilityData from './api/getVisibilityData';
 
 export default function App() {
     const [domain, setDomain] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [data, setData] = useState('');
+
     useEffect(() => {
         (async () => {
-            await getAccessToken();
+            const response = await getAccessToken();
+            if (response.success) setToken(response.data.token);
         })();
+    }, []);
+
+    useEffect(() => {
+        if (!token) return;
         if (process.env.NODE_ENV === 'development') setDomain('senuto.com');
         if (process.env.NODE_ENV === 'production')
             chrome.tabs.query(
@@ -24,7 +33,18 @@ export default function App() {
                     }
                 }
             );
-    }, []);
+    }, [token]);
 
-    return <div className={styles.App}>Hello {domain}</div>;
+    useEffect(() => {
+        (async () => {
+            if (!domain || !token) return;
+            setData(await getVisibilityData(token, domain));
+        })();
+    }, [domain]);
+
+    return (
+        <div className={styles.App}>
+            <pre>{data}</pre>
+        </div>
+    );
 }
