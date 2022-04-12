@@ -1,0 +1,4 @@
+node_modules/
+dist/
+src/api/credentials.ts
+.DS_Store
