@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/token', async (req, res) => {
-    const { email, password } = <GetTokenRequest>req.body;
+    const { email, password }: GetTokenRequest = req.body;
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
