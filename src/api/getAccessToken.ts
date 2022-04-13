@@ -1,11 +1,12 @@
 import fetch from 'node-fetch';
 import SenutoErrorResponse from '../interface/SenutoErrorResponse';
 import SenutoTokenResponse from '../interface/SenutoTokenResponse';
+import config from './config';
 import credentials from './credentials';
 export default async function getAccessToken(): Promise<
     SenutoTokenResponse | SenutoErrorResponse
 > {
-    return await fetch('http://localhost:3300/token', {
+    return await fetch(config.origin + '/api/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)

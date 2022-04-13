@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
+import config from './config';
 export default async function getVisibilityData(token: string, domain: string) {
-    return await fetch('http://localhost:3300/visibility', {
+    return await fetch(config.origin + '/api/visibility', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, domain })
