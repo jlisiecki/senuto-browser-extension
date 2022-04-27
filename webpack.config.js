@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const webpack = require('webpack');
 
 module.exports = [
     {
@@ -30,7 +31,12 @@ module.exports = [
                     ]
                 }
             ]
-        }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+                process: 'process/browser'
+            })
+        ]
     },
     {
         mode: 'production',
